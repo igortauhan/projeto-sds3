@@ -1,6 +1,8 @@
 package com.igor.dsvendas.service;
 
 import com.igor.dsvendas.dto.SaleDTO;
+import com.igor.dsvendas.dto.SaleSucessDTO;
+import com.igor.dsvendas.dto.SaleSumDTO;
 import com.igor.dsvendas.dto.SellerDTO;
 import com.igor.dsvendas.entities.Sale;
 import com.igor.dsvendas.entities.Seller;
@@ -29,5 +31,15 @@ public class SaleService {
         sellerRepository.findAll();
         Page<Sale> result = repository.findAll(pageable);
         return result.map(x -> new SaleDTO(x));
+    }
+
+    @Transactional
+    public List<SaleSumDTO> amountGroupedBySeller() {
+        return repository.amountGroupedBySeller();
+    }
+
+    @Transactional
+    public List<SaleSucessDTO> sucessGroupedBySeller() {
+        return repository.sucessGroupedBySeller();
     }
 }
